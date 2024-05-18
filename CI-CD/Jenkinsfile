@@ -8,9 +8,10 @@ pipeline {
     stages {
         stage("Clone") {
             steps {
-                sh 'ls'
+                sh 'ls -R'
                 git url:'https://github.com/apiwizlabs/wizdesk.git', branch: 'main'
                 sh 'pwd'
+                sh 'ls -R'
             }
         }
 
