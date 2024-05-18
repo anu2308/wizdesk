@@ -1,0 +1,37 @@
+pipeline {
+    agent any
+
+    stages {
+        stage("Clone") {
+            steps {
+                git url: 'https://github.com/apiwizlabs/wizdesk.git', branch: 'main'
+            }
+        }
+
+        stage('Build Frontend') {
+            steps {
+                sh 'cd wizdesk && npm install'
+                sh 'cd wizdesk && npm run build'
+                sh 'cd wizdesk && docker build . -t apiwiz-frontend'
+            }
+        }
+
+        stage('Build Backend') {
+            steps {
+                sh 'cd wizdesk/Server && npm install'
+                sh 'cd wizdesk/Server && docker build . -t apiwiz-backend'
+            }
+        }
+
+        stage('Test') {
+            steps {
+                // Run the tests for the frontend
+                sh 'cd wizdesk && npm test'
+
+                // Run the tests for the backend
+                sh 'cd wizdesk/Server && npm test'
+            }
+        }
+
+    }
+}
