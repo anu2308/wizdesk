@@ -30,7 +30,7 @@ pipeline {
         stage('Build Backend') {
             steps {
                 sh 'cd wizdesk/Server && npm install'
-                sh 'cd wizdesk/Server && docker build -t apiwiz-backend -f Server/Dockerfile .'
+                sh 'cd wizdesk/Server && docker build -t apiwiz-backend -f Dockerfile .'
             }
         }
 
