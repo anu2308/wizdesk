@@ -19,7 +19,7 @@ pipeline {
                 sh 'node update-package.js'
                 sh 'cat wizdesk/package.json'
                 sh 'cd wizdesk && npm install'
-                sh 'cd wizdesk && npm run build --silent'
+                sh 'cd wizdesk && npm run build --no-ci'
                 sh 'docker build -t apiwiz-frontend -f Project-WizDesk/Dockerfile .'
             }
         }
