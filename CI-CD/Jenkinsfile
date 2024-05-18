@@ -23,14 +23,14 @@ pipeline {
                 sh 'cat wizdesk/package.json'
                 sh 'cd wizdesk && npm install'
                 sh 'cd wizdesk && npm run build'
-                sh 'docker build -t apiwiz-frontend -f Project-WizDesk/Dockerfile .'
+                sh 'docker build -t apiwiz-frontend -f Dockerfile .'
             }
         }
 
         stage('Build Backend') {
             steps {
                 sh 'cd wizdesk/Server && npm install'
-                sh 'cd wizdesk/Server && docker build -t apiwiz-backend -f Project-WizDesk/wizdesk/Server/Dockerfile .'
+                sh 'cd wizdesk/Server && docker build -t apiwiz-backend -f Server/Dockerfile .'
             }
         }
 
