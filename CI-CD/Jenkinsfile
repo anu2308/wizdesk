@@ -9,25 +9,24 @@ pipeline {
         stage("Clone") {
             steps {
                 sh 'ls -R'
-                git url:'https://github.com/apiwizlabs/wizdesk.git', branch: 'main'
-                sh 'pwd'
-                sh 'ls -R'
+                dir("wizdesk") {
+                    git url:'https://github.com/apiwizlabs/wizdesk.git', branch: 'main'     
+                }
             }
         }
 
         stage('Build Frontend') {
             steps {
-                sh 'pwd'
-                sh 'npm install'
-                sh 'npm run build'
-                sh 'docker build . -t apiwiz-frontend'
+                sh 'çd wizdesk && npm install'
+                sh 'çd wizdesk && npm run build'
+                sh 'docker build -t apiwiz-frontend -f Project-WizDesk/Dockerfile .'
             }
         }
 
         stage('Build Backend') {
             steps {
-                sh 'cd Server && npm install'
-                sh 'cd Server && docker build . -t apiwiz-backend'
+                sh 'cd wizdesk/Server && npm install'
+                sh 'cd wizdesk/Server && docker build -t apiwiz-backend -f Project-WizDesk/wizdesk/Server/Dockerfile .'
             }
         }
 
