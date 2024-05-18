@@ -11,8 +11,8 @@ pipeline {
         stage('Build Frontend') {
             steps {
                 //sh 'ls'
-                //sh 'npm install'
-                //sh 'npm run build'
+                sh 'npm install'
+                sh 'npm run build'
                 sh 'docker build . -t apiwiz-frontend'
             }
         }
