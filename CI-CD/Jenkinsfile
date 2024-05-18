@@ -17,6 +17,7 @@ pipeline {
         stage('Build Frontend') {
             steps {
                 sh 'cd wizdesk && npm install'
+                sh 'node update-package.js'
                 sh 'cd wizdesk && npm run build'
                 sh 'docker build -t apiwiz-frontend -f Project-WizDesk/Dockerfile .'
             }
