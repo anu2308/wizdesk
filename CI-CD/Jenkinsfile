@@ -37,10 +37,10 @@ pipeline {
         stage('Test') {
             steps {
                 // Run the tests for the frontend
-                sh 'cd wizdesk && npm test --passWithNoTests'
+                sh 'cd wizdesk && npm run test -- --passWithNoTests'
 
                 // Run the tests for the backend
-                sh 'cd wizdesk/Server && npm test --passWithNoTests'
+                sh 'cd wizdesk/Server && npm run test -- --passWithNoTests'
             }
         }
 
