@@ -10,6 +10,7 @@ pipeline {
 
         stage('Build Frontend') {
             steps {
+                sh 'ls'
                 sh 'cd wizdesk && npm install'
                 sh 'cd wizdesk && npm run build'
                 sh 'cd wizdesk && docker build . -t apiwiz-frontend'
