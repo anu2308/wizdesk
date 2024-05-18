@@ -40,7 +40,7 @@ pipeline {
                 sh 'cd wizdesk && npm test -- --passWithNoTests'
 
                 // Run the tests for the backend
-                sh 'cd wizdesk/Server && npm test -- --passWithNoTests'
+                sh 'cd wizdesk/Server && npm run test -- --passWithNoTests'
             }
         }
 
