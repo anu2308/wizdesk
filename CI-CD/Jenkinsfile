@@ -8,13 +8,15 @@ pipeline {
     stages {
         stage("Clone") {
             steps {
-                git url: 'https://github.com/apiwizlabs/wizdesk.git', branch: 'main'
+                sh 'ls'
+                git url:'https://github.com/apiwizlabs/wizdesk.git', branch: 'main'
+                sh 'pwd'
             }
         }
 
         stage('Build Frontend') {
             steps {
-                //sh 'ls'
+                sh 'ls'
                 sh 'npm install'
                 sh 'npm run build'
                 sh 'docker build . -t apiwiz-frontend'
