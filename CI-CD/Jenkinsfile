@@ -1,5 +1,8 @@
 pipeline {
     agent any
+    environment {
+        CI = 'false'
+    }
     
     tools {
         nodejs 'Node16'
@@ -19,7 +22,7 @@ pipeline {
                 sh 'node update-package.js'
                 sh 'cat wizdesk/package.json'
                 sh 'cd wizdesk && npm install'
-                sh 'cd wizdesk && npm run build --no-ci'
+                sh 'cd wizdesk && npm run build'
                 sh 'docker build -t apiwiz-frontend -f Project-WizDesk/Dockerfile .'
             }
         }
