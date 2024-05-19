@@ -1,0 +1,12 @@
+1.  What are different types of services?
+Ans: Kubernetes services are resources that map network traffic to your pod in the cluster.
+* ClusterIp Services:
+* Headless services:
+* NodePort Services
+* LoadBalancer Services
+
+2. What is a pod?
+Ans. Kubernetes pod is a collection of one or more containers and they share same resources. Pod is created using a .yaml file which contains all the specifications of a pod along with the configuration information that determines how a container should run. It’s the smallest execution unit in Kubernetes. Pods can be terminated at any point and then restarted on another node within our Kubernetes cluster.
+K8s pod to run an instance of an application. We can scale out an application by adding more pod replicas
+
+3. 
