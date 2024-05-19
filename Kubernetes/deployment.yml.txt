@@ -1,0 +1,98 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mongodb
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mongodb
+  template:
+    metadata:
+      labels:
+        app: mongodb
+    spec:
+      containers:
+      - name: mongodb
+        image: mongo:latest
+        ports:
+        - containerPort: 27017
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: apiwiz-frontend
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: apiwiz-frontend
+  template:
+    metadata:
+      labels:
+        app: apiwiz-frontend
+    spec:
+      containers:
+      - name: frontend
+        image: dockerhub-username/apiwiz-frontend:latest
+        ports:
+        - containerPort: 80
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: apiwiz-backend
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: apiwiz-backend
+  template:
+    metadata:
+      labels:
+        app: apiwiz-backend
+    spec:
+      containers:
+      - name: backend
+        image: dockerhub-username/apiwiz-backend:latest
+        ports:
+        - containerPort: 5000
+        env:
+          - name: DB_URL
+            value: "mongodb://mongodb-service:27017/db-name"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: mongodb-service
+spec:
+  selector:
+    app: mongodb
+  ports:
+    - protocol: TCP
+      port: 27017
+      targetPort: 27017
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: apiwiz-frontend-service
+spec:
+  selector:
+    app: apiwiz-frontend
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 80
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: apiwiz-backend-service
+spec:
+  selector:
+    app: apiwiz-backend
+  ports:
+    - protocol: TCP
+      port: 5000
+      targetPort: 5000
