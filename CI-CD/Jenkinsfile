@@ -40,6 +40,18 @@ pipeline {
                 sh 'cd wizdesk && npm test -- --passWithNoTests'
             }
         }
+        stage("Push to Repository") {
+            steps {
+                withCredentials([usernamePassword(credentialsId: "DockerHub", passwordVariable: "DockerHubPass", usernameVariable: "DockerHubUser")]) {
+                    sh "docker login -u ${env.DockerHubUser} -p ${env.DockerHubPass}"
+                    sh "docker tag apiwiz-frontend ${env.DockerHubUser}/apiwiz-frontend:${env.BUILD_NUMBER}"
+                    sh "docker push ${env.DockerHubUser}/apiwiz-frontend:${env.BUILD_NUMBER}"
+                    sh "docker tag apiwiz-backend ${env.DockerHubUser}/apiwiz-backend:${env.BUILD_NUMBER}"
+                    sh "docker push ${env.DockerHubUser}/apiwiz-backend:${env.BUILD_NUMBER}"
+                }
+            }
+        }
+
 
     }
 }
