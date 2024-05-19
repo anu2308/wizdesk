@@ -1,0 +1,55 @@
+1. Provide steps to create a directory inside a directory where the parent directory does not exist.
+Ans: mkdir -p dirA/dirB/dirC
+
+2. How to install a package on a Linux server when there is no internet connection?
+Ans: For this we must have ssh connection to the server, so we can copy the files and build them right there in the server and we can install that package or we can copy the binaries.
+
+3. How to access specific folders of Server A from Server B and Server C?
+Ans: * SSH Connection-
+    Access Server A from Server B:
+    From server B: ssh username@A_IP
+
+    Access Server A from Server B:
+    From server C: ssh username@A_IP
+*FTP Connection:
+  To access the specific folders of a Server we can setup FTP Server:
+  TO achieve that, 
+      - make the changes in vsftpd configuration file
+      - open the port 22 in firewall
+      - we can create a user directory and set the permission
+      - we can connect to the server A from server B(where the FTP server is configured) using the command [ftp <IP_of Server_A]
+
+4. How to check all the running processes from a server?
+Ans: Command is:
+        ps --> displays information about active processes
+        top --> displays dynamic real-time information about running processes.
+
+5. Provide the command to delete all the files older than X days inside a specific directory.
+Ans: find /path/to/directory -type f -mtime +X -delete
+	      Where path/to/directory: the directory where the file is located at
+	      X: no of days
+
+6. Create a shell script to identify the process ID a. script should as a user input for process ID b. If the process exists, the script should print the process ID and exit c. If the process doesn't exist script should print the process doesn't exist and asks for another input
+Ans: 
+#!/bin/bash
+while true; do
+    # Ask the user for the PID
+    read -p "Enter the PID of the process you want to check (or 'q' to quit) " pid
+    if [ "$pid" == "q" ]; then
+            echo "Exiting from the script"
+            exit 0
+    fi
+# Check if the process exists
+
+if ps -p $pid > /dev/null; then
+    echo "Process with PID $pid is running."
+else
+    echo "Process with PID $pid is not running."
+fi
+done
+
+
+
+
+
+  
