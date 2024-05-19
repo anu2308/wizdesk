@@ -3,6 +3,9 @@ Ans: mkdir -p dirA/dirB/dirC
 
 2. How to install a package on a Linux server when there is no internet connection?
 Ans: For this we must have ssh connection to the server, so we can copy the files and build them right there in the server and we can install that package or we can copy the binaries.
+On the server having internet we can download .deb package and it's dependencies.
+We can transfer those file via scp on the server with No Internet. Then we can install the package on the server with No Internet (dpkg -i /path_to_directory/package_name.deb)
+
 
 3. How to access specific folders of Server A from Server B and Server C?
 Ans: 
