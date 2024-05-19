@@ -34,7 +34,7 @@ spec:
     spec:
       containers:
       - name: frontend
-        image: dockerhub-username/apiwiz-frontend:latest
+        image: anushreep23/apiwiz-frontend:36
         ports:
         - containerPort: 80
 ---
@@ -54,7 +54,7 @@ spec:
     spec:
       containers:
       - name: backend
-        image: dockerhub-username/apiwiz-backend:latest
+        image: anushreep23/apiwiz-back:36
         ports:
         - containerPort: 5000
         env:
