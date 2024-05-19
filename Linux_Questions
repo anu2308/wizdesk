@@ -5,7 +5,15 @@ Ans: mkdir -p dirA/dirB/dirC
 Ans: For this we must have ssh connection to the server, so we can copy the files and build them right there in the server and we can install that package or we can copy the binaries.
 
 3. How to access specific folders of Server A from Server B and Server C?
-Ans: * SSH Connection-
+Ans: 
+* NFS (Network File System):
+     Network File System is a distributed file system protocol that allows us to mount remote directories on your server. It is ideal, where the shared resources must be accessed regulary.
+	We will have to setup the NFS for the host as well as the client server individually.
+	For the host server, first, we will have to create the shared directory. This can achieved by configuring a general purpose mount(/var/nfs/general), exporting the home directory.Then we will have to configure the NFS exports(/etc/exports) and we will have to adjust the firewall of the host server.
+	For the client server, we will have to create mount points and mounting directories.
+	We can test the setup by running the command from the host server.
+
+* SSH Connection-
     Access Server A from Server B:
     From server B: ssh username@A_IP
 
