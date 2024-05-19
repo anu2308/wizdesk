@@ -1,0 +1,49 @@
+1. What is docker and why do we need it?
+Ans: Docker is a platform designed to simplify the process of building, shipping, and running applications within containers. Containers provide a standardized way to package an application and its dependencies, ensuring that it runs consistently across different environments.
+	Docker enables more efficient use of system resources than VM. Docker enables fast application deployment by allowing containers to start up quickly. Containers can be easily scaled up or down to handle depending upon the workloads.It supports versioning of images, which makes it easy to roll back to previous versions if needed.
+ So docker provides a consistent, isolated, and efficient environment for running applications
+
+2. What is the docker lifecycle?
+Ans: We can create a docker image from Dockefile and Docker Container from Docker Image,
+
+Dockerfile → Docker Image → Docker Container
+Dockerfile contains the instruction to make the docker image.
+
+We can divide the the lifecycle of Docker Image and Docker container individually:
+Lifecycle of Docker Container is given below:
+ 	The main component for creating a docker container is docker image.
+We can “Build” a docker image from a docker file, it basically converts the Dockerfile to Docker image or we can pull a docker image from the registry(Docker Hub).
+
+* Create Phase:
+Docker container is created from a docker image.
+docker create - - name (container_name) (image_name)
+ We can also use a docker run command to make and start the container in a single command
+	
+* Running Phase:
+
+Docker start can be used to start a container.
+Docker run can make and start a container in a single command. In this case, the creation of the container is not needed.
+
+* Pausing Phase:
+  		In this phase, the current executing command gets paused. It suspends all the running processes within the container. When a container is paused, it is still running, but all of its processes are paused and no new processes can be started until the container is unpaused.
+Unpause Phase:
+The container process will resume from exactly where they were paused. 
+Pausing and unpausing containers are efficient processes as they don’t trigger the complete lifecycle events, which is time-consuming.
+* Stopped Phase:
+Running the docker stop command allows us to gracefully stop a container and cleanly shut down the program or process inside it. Docker sends a SIGTERM signal to the main process (PID 1) running inside the container. 
+The container moves into the stopped state after the main process inside the container finishes its execution. In this state, the container is not removed from the system. It's just not actively running any process. 
+	A docker container can be initiated again using the docker start command.
+* Kill Phase
+		The kill phase refers to the situation when a container needs to be forcefully stopped. When the docker kill command is executed, the container's process is terminated instantly, and the container moves to the "Exited" state.
+      
+3. What is the difference between an image and a container?
+Ans. Docker image is a template for running a container and the docker container provides a runtime environment for the application initiated in the docker images. 
+The docker image is immutable, which means we can’t modify the docker image. So to apply some changes we will have to create a new image.
+Whereas a docker container is mutable and we can actually make the changes during runtime. 
+We can create multiple docker containers from a single docker image. But each docker can be created from a single docker image
+
+4. How to check docker container logs? Provide the command for the same
+Ans. Command: docker log [container_id] / [container_name]
+
+
+      
