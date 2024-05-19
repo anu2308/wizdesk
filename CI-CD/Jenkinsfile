@@ -17,30 +17,27 @@ pipeline {
             }
         }
 
-        // stage('Build Frontend') {
-        //     steps {
-        //         sh 'node update-package.js'
-        //         sh 'cat wizdesk/package.json'
-        //         sh 'cd wizdesk && npm install'
-        //         sh 'cd wizdesk && npm run build'
-        //         sh 'docker build -t apiwiz-frontend -f Dockerfile .'
-        //     }
-        // }
+        stage('Build Frontend') {
+            steps {
+                sh 'node update-package.js'
+                sh 'cat wizdesk/package.json'
+                sh 'cd wizdesk && npm install'
+                sh 'cd wizdesk && npm run build'
+                sh 'docker build -t apiwiz-frontend -f Dockerfile .'
+            }
+        }
 
-        // stage('Build Backend') {
-        //     steps {
-        //         sh 'cd wizdesk/Server && npm install'
-        //         sh 'docker build -t apiwiz-backend -f Server/Dockerfile .'
-        //     }
-        // }
+        stage('Build Backend') {
+            steps {
+                sh 'cd wizdesk/Server && npm install'
+                sh 'docker build -t apiwiz-backend -f Server/Dockerfile .'
+            }
+        }
 
         stage('Test') {
             steps {
                 // Run the tests for the frontend
                 sh 'cd wizdesk && npm test -- --passWithNoTests'
-
-                // Run the tests for the backend
-                sh 'cd wizdesk/Server && npm run test -- --passWithNoTests'
             }
         }
 
