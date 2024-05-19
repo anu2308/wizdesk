@@ -9,4 +9,36 @@ Ans: Kubernetes services are resources that map network traffic to your pod in t
 Ans. Kubernetes pod is a collection of one or more containers and they share same resources. Pod is created using a .yaml file which contains all the specifications of a pod along with the configuration information that determines how a container should run. It’s the smallest execution unit in Kubernetes. Pods can be terminated at any point and then restarted on another node within our Kubernetes cluster.
 K8s pod to run an instance of an application. We can scale out an application by adding more pod replicas
 
-3. 
+3. Create a pod with the above created custom image when a pod dies k8s should automatically restart
+Ans: In order to make sure that the pod is continuously running in spite of any failure we have to set the RestartPolicy to always.
+
+Example: deployment.yml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx-deployment
+  labels:
+    app: nginx
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: nginx
+  template:
+    metadata:
+      labels:
+        app: nginx
+    spec:
+      containers:
+      - name: nginx
+        image: nginx:1.14.2
+        ports:
+        - containerPort: 80
+        restartPolicy: Always
+
+4. How to access the custom application with a specific port?
+Ans. To access a custom application with a specific port in Kubernetes, we have to define a Service resource to expose your application internally or externally. 
+In the Service resource manifest, we have to specify port on which the application is listening on (targetPort) and the port that want to expose externally (port).
+Port and Target can be different or same.
+
+
