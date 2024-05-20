@@ -56,7 +56,7 @@ pipeline {
                 // Deploy the MongoDB database and application to the Kubernetes cluster
                 script {
                     // Load the Kubernetes credentials
-                    withCredentials([kubernetes(credentialsId: 'KubeconfigCredentials', variable: 'KUBECONFIG')]) {
+                    withCredentials([file(credentialsId: 'KubeconfigCredentials', variable: 'KUBECONFIG')]) {
                         // Deploy the MongoDB database and application using kubectl
                         sh "kubectl apply -f Kubernetes/deployment.yml"
                     }
